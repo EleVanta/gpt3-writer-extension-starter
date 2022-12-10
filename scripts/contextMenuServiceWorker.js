@@ -44,7 +44,7 @@ const generate = async (prompt) => {
 
     const completion = await completionResponse.json();
     return completion.choices.pop();
-}
+};
 
 const generateCompletionAction = async (info) => {
     try {
