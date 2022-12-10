@@ -8,7 +8,7 @@ const getKey = () => {
     });
   });
 };
-const sendMessage = (content) => {
+/*const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
 
@@ -17,12 +17,12 @@ const sendMessage = (content) => {
       { message: "inject", content },
       (response) => {
         if (response.status === "failed") {
-          console.log("njection failed.");
+          console.log("injection failed.");
         }
       }
     );
   });
-};
+};*/
 
 const generate = async (prompt) => {
     const key = await getKey();
