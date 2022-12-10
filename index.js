@@ -1,45 +1,42 @@
 const checkForKey = () => {
-    return new Promise((resolve, reject) => {
-      chrome.storage.local.get(['openai-key'], (result) => {
-        resolve(result['openai-key']);
-      });
-    });
-  };
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.get(["openai-key"], (result) => {
+			resolve(result["openai-key"]);
+		});
+	});
+};
 
 const encode = (input) => {
-    return btoa(input);
-  };
+	return btoa(input);
+};
 
 const saveKey = () => {
-  const input = document.getElementById('key_input');
-    
-  if (input) {
-    const { value } = input;
+	const input = document.getElementById("key_input");
 
-    // Encode String
-    const encodedValue = encode(value);
+	if (input) {
+		const { value } = input;
 
-    // Save to google storage
-    chrome.storage.local.set({ 'openai-key': encodedValue }, () => {
-      document.getElementById('key_needed').style.display = 'none';
-      document.getElementById('key_entered').style.display = 'block';
-    });
-  }
-}
+		// Encode String
+		const encodedValue = encode(value);
 
-const changeKey = () => {
-    document.getElementById('key_needed').style.display = 'block';
-    document.getElementById('key_entered').style.display = 'none';
-  };
+		// Save to google storage
+		chrome.storage.local.set({ "openai-key": encodedValue }, () => {
+			document.getElementById("key_needed").style.display = "none";
+			document.getElementById("key_entered").style.display = "block";
+		});
+	}
+};
 
-document.getElementById('save_key_button').addEventListener('click', saveKey);
+const changeKey = () => {};
+
+document.getElementById("save_key_button").addEventListener("click", saveKey);
 document
-  .getElementById('change_key_button')
-  .addEventListener('click', changeKey);
+	.getElementById("change_key_button")
+	.addEventListener("click", changeKey);
 
-  checkForKey().then((response) => {
-    if (response) {
-      document.getElementById('key_needed').style.display = 'none';
-      document.getElementById('key_entered').style.display = 'block';
-    }
-  });
+checkForKey().then((response) => {
+	if (response) {
+		document.getElementById("key_needed").style.display = "none";
+		document.getElementById("key_entered").style.display = "block";
+	}
+});
