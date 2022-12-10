@@ -1,4 +1,5 @@
-const getKey = () => {return new Promise((resolve, reject) => {
+const getKey = () => {
+  return new Promise((resolve, reject) => {
     chrome.storage.local.get(['openai-key'], (result) => {
       if (result['openai-key']) {
         const decodedKey = atob(result['openai-key']);
