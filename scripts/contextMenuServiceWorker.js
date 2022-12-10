@@ -50,8 +50,8 @@ const generateCompletionAction = async (info) => {
     try {
       sendMessage('generating...');
 
-        const { selectionText } = info;
-        const basePromptPrefix = `
+    const { selectionText } = info;
+    const basePromptPrefix = `
         Create a meal based on type of meal, diet, and mood:
 	      `;
     const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
