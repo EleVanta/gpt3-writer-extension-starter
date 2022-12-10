@@ -34,10 +34,8 @@ const generateCompletionAction = async (info) => {
     try {
         const { selectionText } = info;
         const basePromptPrefix = `
-        Write a description of a meal and it's recipe based type of meal, diet, and mood of the following criteria:
-        ${req.body.userInput}
-	    Also provide the length of time it will take to make the meal!
-	`;
+        Write a description of a meal, provide the legnth of time it will take to make the meal, and use the 3 attributes based type of meal, diet, and mood to provide a tasty recipe:
+	      `;
     const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
 
     console.log(baseCompletion.text)
