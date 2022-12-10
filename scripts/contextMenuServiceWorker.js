@@ -7,6 +7,21 @@ const getKey = () => {return new Promise((resolve, reject) => {
     });
   });
 };
+const sendMessage = (content) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const activeTab = tabs[0].id;
+
+    chrome.tabs.sendMessage(
+      activeTab,
+      { message: 'inject', content },
+      (response) => {
+        if (response.status === 'failed') {
+          console.log('injection failed.');
+        }
+      }
+    );
+  });
+};
 
 const generate = async (prompt) => {
     const key = await getKey();
@@ -32,15 +47,28 @@ const generate = async (prompt) => {
 
 const generateCompletionAction = async (info) => {
     try {
+      sendMessage('generating...');
+
         const { selectionText } = info;
         const basePromptPrefix = `
-        Write a description of a meal, provide the legnth of time it will take to make the meal, and use the 3 attributes based type of meal, diet, and mood to provide a tasty recipe:
+        Create a meal based on type of meal, diet, and mood:
 	      `;
     const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
 
-    console.log(baseCompletion.text)
+    const secondPrompt = `
+    Create a delicious recipe based on the meal below and provide the length of time it will take to make!
+      
+    ${baseCompletion.text}
+      
+    Recipe:
+      `;
+
+    const secondPromptCompletion = await generate(secondPrompt);
+    sendMessage(secondPromptCompletion.text);
   } catch (error) {
     console.log(error);
+
+    sendMessage(error.toString());
   }
 };
 
