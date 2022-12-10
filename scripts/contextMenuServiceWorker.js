@@ -8,7 +8,7 @@ const getKey = () => {
     });
   });
 };
-/*const sendMessage = (content) => {
+const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
 
@@ -22,7 +22,7 @@ const getKey = () => {
       }
     );
   });
-};*/
+};
 
 const generate = async (prompt) => {
     const key = await getKey();
@@ -56,7 +56,7 @@ const generateCompletionAction = async (info) => {
 	      `;
     const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
 
-    const secondPrompt = `
+    /*const secondPrompt = `
     Create a delicious recipe based on the meal below and provide the length of time it will take to make!
       
     ${baseCompletion.text}
@@ -65,7 +65,7 @@ const generateCompletionAction = async (info) => {
       `;
 
     const secondPromptCompletion = await generate(secondPrompt);
-    sendMessage(secondPromptCompletion.text);
+    sendMessage(secondPromptCompletion.text);*/
   } catch (error) {
     console.log(error);
 
