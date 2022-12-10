@@ -71,11 +71,11 @@ const generateCompletionAction = async (info) => {
     sendMessage(error.toString());
   }
 };
-
+chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.create({
     id: 'context-run',
     title: 'Generate Recipes',
     contexts: ['selection'],
   });
-
+});
   chrome.contextMenus.onClicked.addListener(generateCompletionAction);
