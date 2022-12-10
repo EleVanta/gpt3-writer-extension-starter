@@ -8,7 +8,7 @@ const getKey = () => {
     });
   });
 };
-/*const sendMessage = (content) => {
+const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
 
@@ -22,7 +22,7 @@ const getKey = () => {
       }
     );
   });
-};*/
+};
 
 const generate = async (prompt) => {
     const key = await getKey();
